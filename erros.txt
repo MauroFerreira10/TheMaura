@@ -1,0 +1,110 @@
+
+﻿
+index.html:1 
+ GET http://localhost:8080/avljl2rk9q5pNjdiNWEwMmRjNWQzMzg5NjBiMTdhN2U5/7ZblqsTeeE5q7zjxhGjeEUmRx4o net::ERR_ABORTED 404 (File not found)
+3
+offbrand-05.js:5467 Error: Missing KTX 2.0 identifier.
+    at mM (offbrand-05.js:5466:3949)
+    at hE._createTexture (offbrand-05.js:5467:1475)
+    at hE.parse (offbrand-05.js:5467:963)
+    at Object.onLoad (offbrand-05.js:5467:748)
+    at offbrand-05.js:130:40867
+
+index.html:1 Access to fetch at 'https://assets.itsoffbrand.io/lando/rive/signature.riv' from origin 'http://localhost:8080' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+offbrand-05.js:34 
+ GET https://assets.itsoffbrand.io/lando/rive/signature.riv net::ERR_FAILED 200 (OK)
+offbrand-05.js:91 Failed to load Rive file https://assets.itsoffbrand.io/lando/rive/signature.riv: TypeError: Failed to fetch
+    at offbrand-05.js:34:34750
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+    at offbrand-05.js:31:24443
+    at new Promise (<anonymous>)
+    at G (offbrand-05.js:31:24216)
+    at KA (offbrand-05.js:34:34628)
+    at f.<anonymous> (offbrand-05.js:34:12980)
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+index.html:1 Access to fetch at 'https://assets.itsoffbrand.io/lando/rive/btn-ui.riv' from origin 'http://localhost:8080' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+offbrand-05.js:34 
+ GET https://assets.itsoffbrand.io/lando/rive/btn-ui.riv net::ERR_FAILED 200 (OK)
+offbrand-05.js:91 Failed to load Rive file https://assets.itsoffbrand.io/lando/rive/btn-ui.riv: TypeError: Failed to fetch
+    at offbrand-05.js:34:34750
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+    at offbrand-05.js:31:24443
+    at new Promise (<anonymous>)
+    at G (offbrand-05.js:31:24216)
+    at KA (offbrand-05.js:34:34628)
+    at f.<anonymous> (offbrand-05.js:34:12980)
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+index.html:1 Access to fetch at 'https://assets.itsoffbrand.io/lando/rive/reef.riv' from origin 'http://localhost:8080' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+offbrand-05.js:34 
+ GET https://assets.itsoffbrand.io/lando/rive/reef.riv net::ERR_FAILED 200 (OK)
+offbrand-05.js:91 Failed to load Rive file https://assets.itsoffbrand.io/lando/rive/reef.riv: TypeError: Failed to fetch
+    at offbrand-05.js:34:34750
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+    at offbrand-05.js:31:24443
+    at new Promise (<anonymous>)
+    at G (offbrand-05.js:31:24216)
+    at KA (offbrand-05.js:34:34628)
+    at f.<anonymous> (offbrand-05.js:34:12980)
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+index.html:1 Access to fetch at 'https://assets.itsoffbrand.io/lando/rive/phrases.riv' from origin 'http://localhost:8080' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+offbrand-05.js:34 
+ GET https://assets.itsoffbrand.io/lando/rive/phrases.riv net::ERR_FAILED 200 (OK)
+offbrand-05.js:91 Failed to load Rive file https://assets.itsoffbrand.io/lando/rive/phrases.riv: TypeError: Failed to fetch
+    at offbrand-05.js:34:34750
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+    at offbrand-05.js:31:24443
+    at new Promise (<anonymous>)
+    at G (offbrand-05.js:31:24216)
+    at KA (offbrand-05.js:34:34628)
+    at f.<anonymous> (offbrand-05.js:34:12980)
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+index.html:1 Access to fetch at 'https://assets.itsoffbrand.io/lando/rive/ln4.riv' from origin 'http://localhost:8080' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+offbrand-05.js:34 
+ GET https://assets.itsoffbrand.io/lando/rive/ln4.riv net::ERR_FAILED 200 (OK)
+offbrand-05.js:91 Failed to load Rive file https://assets.itsoffbrand.io/lando/rive/ln4.riv: TypeError: Failed to fetch
+    at offbrand-05.js:34:34750
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+    at offbrand-05.js:31:24443
+    at new Promise (<anonymous>)
+    at G (offbrand-05.js:31:24216)
+    at KA (offbrand-05.js:34:34628)
+    at f.<anonymous> (offbrand-05.js:34:12980)
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+index.html:1 Access to fetch at 'https://assets.itsoffbrand.io/lando/rive/circuits.riv' from origin 'http://localhost:8080' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+offbrand-05.js:34 
+ GET https://assets.itsoffbrand.io/lando/rive/circuits.riv net::ERR_FAILED 200 (OK)
+offbrand-05.js:91 Failed to load Rive file https://assets.itsoffbrand.io/lando/rive/circuits.riv: TypeError: Failed to fetch
+    at offbrand-05.js:34:34750
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+    at offbrand-05.js:31:24443
+    at new Promise (<anonymous>)
+    at G (offbrand-05.js:31:24216)
+    at KA (offbrand-05.js:34:34628)
+    at f.<anonymous> (offbrand-05.js:34:12980)
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+index.html:1 Access to fetch at 'https://assets.itsoffbrand.io/lando/rive/mob-landscape.riv' from origin 'http://localhost:8080' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+offbrand-05.js:34 
+ GET https://assets.itsoffbrand.io/lando/rive/mob-landscape.riv net::ERR_FAILED 200 (OK)
+offbrand-05.js:91 Failed to load Rive file https://assets.itsoffbrand.io/lando/rive/mob-landscape.riv: TypeError: Failed to fetch
+    at offbrand-05.js:34:34750
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)
+    at offbrand-05.js:31:24443
+    at new Promise (<anonymous>)
+    at G (offbrand-05.js:31:24216)
+    at KA (offbrand-05.js:34:34628)
+    at f.<anonymous> (offbrand-05.js:34:12980)
+    at u (offbrand-05.js:31:25590)
+    at Object.next (offbrand-05.js:31:24809)

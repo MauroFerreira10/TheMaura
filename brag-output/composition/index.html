@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Portfólio Mauro Ferreira — Brag</title>
+    <script src="assets/gsap.min.js"></script>
+    <script src="assets/audio-inline.js"></script>
+    <style>
+      @font-face {
+        font-family: Brier;
+        src: url("assets/fonts/Brier-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Mona Sans Variable";
+        src: url("assets/fonts/MonaSans-Variable.woff2") format("woff2");
+        font-weight: 200 900;
+        font-style: normal;
+        font-display: block;
+      }
+
+      :root {
+        --bg: #282c20;
+        --fg: #f4f4ed;
+        --lime: #d2ff00;
+        --grey: #b9bbad;
+        --tint: #3b3c38;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: "Mona Sans Variable", Arial, sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      .clip {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* ---------- persistent background layer (untimed) ---------- */
+      #bg {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      #bgGlow {
+        position: absolute;
+        left: 50%;
+        top: -46%;
+        width: 1700px;
+        height: 1500px;
+        margin-left: -850px;
+        background: radial-gradient(
+          ellipse at 50% 50%,
+          rgba(210, 255, 0, 0.85) 0%,
+          rgba(210, 255, 0, 0) 62%
+        );
+        opacity: 0.11;
+      }
+      #bgGrid {
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(210, 255, 0, 0.055) 1px,
+            transparent 1px
+          ),
+          linear-gradient(to bottom, rgba(210, 255, 0, 0.04) 1px, transparent 1px);
+        background-size: 240px 240px;
+      }
+      #bgVignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 1300px 900px at 50% 46%,
+          rgba(0, 0, 0, 0) 40%,
+          rgba(0, 0, 0, 0.55) 100%
+        );
+      }
+      .reg {
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        border: 2px solid rgba(210, 255, 0, 0.4);
+      }
+      .reg.tl { left: 46px; top: 46px; border-right: 0; border-bottom: 0; }
+      .reg.tr { right: 46px; top: 46px; border-left: 0; border-bottom: 0; }
+      .reg.bl { left: 46px; bottom: 46px; border-right: 0; border-top: 0; }
+      .reg.br { right: 46px; bottom: 46px; border-left: 0; border-top: 0; }
+
+      .ghost {
+        position: absolute;
+        font-family: Brier, Georgia, serif;
+        font-weight: 700;
+        color: rgb(128, 132, 113);
+        white-space: nowrap;
+        letter-spacing: -0.03em;
+        user-select: none;
+      }
+
+      .eyebrow {
+        font-size: 28px;
+        font-weight: 500;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: var(--grey);
+        opacity: 0;
+      }
+
+      /* ---------- scene 1 : a marca ---------- */
+      #markWrap {
+        position: absolute;
+        left: 190px;
+        top: 372px;
+        width: 470px;
+        height: 248px;
+      }
+      #mark {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      #mark path {
+        fill: none;
+        stroke: var(--lime);
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+      }
+      #s1Eyebrow {
+        position: absolute;
+        left: 194px;
+        top: 672px;
+      }
+      #s1Rule {
+        position: absolute;
+        left: 720px;
+        top: 494px;
+        width: 470px;
+        height: 2px;
+        background: var(--lime);
+        transform-origin: left center;
+        opacity: 0;
+      }
+      #s1Meta {
+        position: absolute;
+        left: 1228px;
+        top: 452px;
+        font-size: 21px;
+        font-weight: 500;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: rgba(210, 255, 0, 0.72);
+        opacity: 0;
+      }
+      #s1Meta span {
+        display: block;
+        margin-bottom: 14px;
+        color: var(--grey);
+      }
+      #s1Meta b {
+        color: var(--lime);
+        font-weight: 700;
+      }
+
+      /* ---------- scene 2 : o piloto ---------- */
+      #portraitW {
+        position: absolute;
+        right: 128px;
+        top: 96px;
+        width: 760px;
+        height: 880px;
+      }
+      #portraitGlow {
+        position: absolute;
+        left: 50%;
+        top: 42%;
+        width: 760px;
+        height: 760px;
+        margin-left: -380px;
+        margin-top: -380px;
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(210, 255, 0, 0.62) 0%,
+          rgba(210, 255, 0, 0) 66%
+        );
+        opacity: 0.34;
+      }
+      .portrait {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: 50% 100%;
+      }
+      #wipeLayer {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+      }
+      #s2Head {
+        position: absolute;
+        left: 118px;
+        bottom: 176px;
+        width: 900px;
+      }
+      #s2Kicker {
+        position: absolute;
+        left: 122px;
+        bottom: 424px;
+      }
+      .h-line {
+        display: block;
+        opacity: 0;
+      }
+      #s2L1 {
+        font-size: 84px;
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        color: var(--fg);
+      }
+      #s2L2 {
+        font-family: Brier, Georgia, serif;
+        font-weight: 700;
+        font-size: 152px;
+        line-height: 0.98;
+        letter-spacing: -0.025em;
+        color: var(--lime);
+      }
+      #s2Name {
+        position: absolute;
+        left: 122px;
+        bottom: 104px;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--grey);
+        opacity: 0;
+      }
+
+      /* ---------- scene 3 : a dualidade ---------- */
+      .half {
+        position: absolute;
+        top: 0;
+        width: 960px;
+        height: 100%;
+        overflow: hidden;
+      }
+      #halfBack { left: 0; }
+      #halfFront { left: 960px; }
+      .halfImg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 38%;
+        opacity: 0.5;
+      }
+      .halfScrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(40, 44, 32, 0.93) 0%,
+          rgba(40, 44, 32, 0.91) 52%,
+          rgba(40, 44, 32, 0.58) 80%,
+          rgba(40, 44, 32, 0.5) 100%
+        );
+      }
+      #divider {
+        position: absolute;
+        left: 958px;
+        top: 0;
+        width: 3px;
+        height: 100%;
+        background: var(--lime);
+        transform-origin: center top;
+        opacity: 0;
+      }
+      .colText {
+        position: absolute;
+        top: 300px;
+        width: 700px;
+        padding: 0 96px;
+        box-sizing: content-box;
+      }
+      #colBack { left: 0; }
+      #colFront { left: 960px; }
+      .colHead {
+        display: block;
+        font-size: 108px;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        opacity: 0;
+      }
+      #headBack {
+        font-family: Brier, Georgia, serif;
+        font-weight: 700;
+        color: var(--fg);
+      }
+      #headFront {
+        font-weight: 800;
+        color: var(--lime);
+      }
+      .colRule {
+        display: block;
+        width: 116px;
+        height: 3px;
+        margin: 30px 0 34px;
+        opacity: 0;
+      }
+      #ruleBack {
+        background: var(--fg);
+      }
+      #ruleFront {
+        background: var(--lime);
+      }
+      .colBody {
+        font-size: 34px;
+        line-height: 1.42;
+        font-weight: 400;
+        color: var(--grey);
+        opacity: 0;
+      }
+      .colBody strong {
+        color: var(--fg);
+        font-weight: 700;
+      }
+      .colTag {
+        display: block;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 26px;
+        opacity: 0;
+      }
+      #tagBack {
+        color: #a5a79d;
+      }
+      #tagFront { color: rgba(210, 255, 0, 0.7); }
+
+      /* ---------- scene 4 : os projetos ---------- */
+      #s4Title {
+        position: absolute;
+        left: 118px;
+        top: 118px;
+      }
+      .t-line {
+        display: block;
+        font-size: 82px;
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+        opacity: 0;
+      }
+      #t1 { font-weight: 300; color: var(--fg); }
+      #t2 {
+        font-family: Brier, Georgia, serif;
+        font-weight: 700;
+        color: var(--lime);
+      }
+      .tile {
+        position: absolute;
+        top: 356px;
+        width: 460px;
+        opacity: 0;
+      }
+      #tile1 { left: 122px; }
+      #tile2 { left: 730px; }
+      #tile3 { left: 1338px; }
+      .tileFrame {
+        position: relative;
+        width: 460px;
+        height: 396px;
+      }
+      .tileFrame svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .tileImg {
+        position: absolute;
+        left: 16px;
+        top: 16px;
+        width: 428px;
+        height: 322px;
+        object-fit: cover;
+        object-position: 50% 30%;
+      }
+      .tileMeta {
+        display: flex;
+        align-items: baseline;
+        gap: 18px;
+        margin-top: 26px;
+      }
+      .tileName {
+        font-family: Brier, Georgia, serif;
+        font-weight: 700;
+        font-size: 40px;
+        color: var(--fg);
+        letter-spacing: -0.01em;
+      }
+      .tileDate {
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(210, 255, 0, 0.85);
+      }
+      #s4Sign {
+        position: absolute;
+        left: 122px;
+        bottom: 128px;
+        width: 340px;
+        height: 108px;
+        clip-path: inset(0 100% 0 0);
+      }
+      #s4Sign img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: left center;
+      }
+      #s4Cta {
+        position: absolute;
+        right: 122px;
+        bottom: 150px;
+        font-size: 34px;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--lime);
+        opacity: 0;
+      }
+      #s4CtaRule {
+        position: absolute;
+        right: 122px;
+        bottom: 132px;
+        width: 300px;
+        height: 2px;
+        background: var(--lime);
+        transform-origin: right center;
+        opacity: 0;
+      }
+
+      /* ---------- blackout ---------- */
+      #blackout {
+        position: absolute;
+        inset: 0;
+        background: #000;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="20.2"
+      data-fps="30"
+    >
+      <!-- persistent background -->
+      <div id="bg">
+        <div id="bgGlow"></div>
+        <div id="bgGrid" data-layout-allow-overflow></div>
+        <div id="bgVignette"></div>
+        <div class="reg tl"></div>
+        <div class="reg tr"></div>
+        <div class="reg bl"></div>
+        <div class="reg br"></div>
+      </div>
+
+      <!-- ============ SCENE 1 : a marca ============ -->
+      <section id="s1" class="clip" data-start="0" data-duration="3.27" data-track-index="0">
+        <div class="ghost" id="ghost1" data-layout-allow-overflow style="left: -70px; top: 128px; font-size: 250px">
+          FULL-STACK
+        </div>
+        <div id="markWrap">
+          <svg id="mark" viewBox="0 0 97 51" xmlns="http://www.w3.org/2000/svg">
+            <path id="mk1" d="M35 3 L6 25.5 L35 48" pathLength="1" />
+            <path id="mk2" d="M62 3 L91 25.5 L62 48" pathLength="1" />
+            <path id="mk3" d="M45 48 L53 3" pathLength="1" />
+          </svg>
+        </div>
+        <div id="s1Rule"></div>
+        <div id="s1Meta">
+          <span>Programador</span>
+          <b>Full-Stack</b>
+        </div>
+        <div id="s1Eyebrow" class="eyebrow">a programar desde 2019</div>
+      </section>
+
+      <!-- ============ SCENE 2 : o piloto ============ -->
+      <section id="s2" class="clip" data-start="3.27" data-duration="5.47" data-track-index="1">
+        <div class="ghost" id="ghost2" style="left: 60px; top: 96px; font-size: 210px">
+          2019
+        </div>
+        <div id="portraitW">
+          <div id="portraitGlow"></div>
+          <img
+            id="portraitColor"
+            class="portrait"
+            src="assets/mauro-ferreira-hero-cut.webp"
+            alt=""
+          />
+          <img
+            id="wipeLayer"
+            class="portrait"
+            src="assets/mauro-ferreira-hover-cut.webp"
+            alt=""
+          />
+        </div>
+        <div id="s2Kicker" class="eyebrow">Portfólio oficial</div>
+        <div id="s2Head">
+          <span id="s2L1" class="h-line">Programador</span>
+          <span id="s2L2" class="h-line">Full-Stack</span>
+        </div>
+        <div id="s2Name">Mauro Ferreira</div>
+      </section>
+
+      <!-- ============ SCENE 3 : a dualidade ============ -->
+      <section id="s3" class="clip" data-start="8.74" data-duration="5.99" data-track-index="2">
+        <div id="halfBack" class="half">
+          <img class="halfImg" src="assets/mauro-ferreira-backend-bw.webp" alt="" />
+          <div class="halfScrim"></div>
+        </div>
+        <div id="halfFront" class="half">
+          <img class="halfImg" src="assets/mauro-ferreira-frontend-color.webp" alt="" />
+          <div class="halfScrim"></div>
+        </div>
+        <div id="divider"></div>
+
+        <div id="colBack" class="colText">
+          <span id="tagBack" class="colTag">Bastidores</span>
+          <span id="headBack" class="colHead">BACK END</span>
+          <span id="ruleBack" class="colRule"></span>
+          <p id="bodyBack" class="colBody">
+            <strong>APIs</strong>, bases de dados e a lógica de servidor que potencia tudo o
+            que acontece nos bastidores.
+          </p>
+        </div>
+
+        <div id="colFront" class="colText">
+          <span id="tagFront" class="colTag">Em direto</span>
+          <span id="headFront" class="colHead">FRONT END</span>
+          <span id="ruleFront" class="colRule"></span>
+          <p id="bodyFront" class="colBody">
+            <strong>Interfaces</strong>, animações e as experiências visuais que se tocam
+            diretamente.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ SCENE 4 : os projetos ============ -->
+      <section id="s4" class="clip" data-start="14.73" data-duration="5.17" data-track-index="3">
+        <div
+          class="ghost"
+          id="ghost3"
+          data-layout-allow-overflow
+          data-layout-allow-overlap
+          style="left: 800px; top: 100px; font-size: 160px"
+        >
+          EM DESTAQUE
+        </div>
+        <div id="s4Title">
+          <span id="t1" class="t-line">Projetos</span>
+          <span id="t2" class="t-line">Em Destaque</span>
+        </div>
+
+        <div id="tile1" class="tile">
+          <div class="tileFrame">
+            <svg viewBox="0 0 187 188" preserveAspectRatio="none">
+              <path
+                d="M8 .5h170.12a7.5 7.5 0 0 1 7.5 7.5v154.61a7.5 7.5 0 0 1-7.5 7.5H60.681a10.5 10.5 0 0 0-8.21 3.954l-7.86 9.858a9.5 9.5 0 0 1-7.427 3.578H8A7.5 7.5 0 0 1 .5 180V8A7.5 7.5 0 0 1 8 .5Z"
+                fill="none"
+                stroke="#d2ff00"
+                stroke-width="1"
+              />
+            </svg>
+            <img class="tileImg" src="assets/proj-rsla-hover.webp" alt="" />
+          </div>
+          <div class="tileMeta">
+            <span class="tileName">RSLA Comercial</span>
+            <span class="tileDate">2025</span>
+          </div>
+        </div>
+
+        <div id="tile2" class="tile">
+          <div class="tileFrame">
+            <svg viewBox="0 0 187 188" preserveAspectRatio="none">
+              <path
+                d="M8 .5h170.12a7.5 7.5 0 0 1 7.5 7.5v154.61a7.5 7.5 0 0 1-7.5 7.5H60.681a10.5 10.5 0 0 0-8.21 3.954l-7.86 9.858a9.5 9.5 0 0 1-7.427 3.578H8A7.5 7.5 0 0 1 .5 180V8A7.5 7.5 0 0 1 8 .5Z"
+                fill="none"
+                stroke="#d2ff00"
+                stroke-width="1"
+              />
+            </svg>
+            <img class="tileImg" src="assets/proj-safebus-hover.webp" alt="" />
+          </div>
+          <div class="tileMeta">
+            <span class="tileName">SafeBus</span>
+            <span class="tileDate">em breve</span>
+          </div>
+        </div>
+
+        <div id="tile3" class="tile">
+          <div class="tileFrame">
+            <svg viewBox="0 0 187 188" preserveAspectRatio="none">
+              <path
+                d="M8 .5h170.12a7.5 7.5 0 0 1 7.5 7.5v154.61a7.5 7.5 0 0 1-7.5 7.5H60.681a10.5 10.5 0 0 0-8.21 3.954l-7.86 9.858a9.5 9.5 0 0 1-7.427 3.578H8A7.5 7.5 0 0 1 .5 180V8A7.5 7.5 0 0 1 8 .5Z"
+                fill="none"
+                stroke="#d2ff00"
+                stroke-width="1"
+              />
+            </svg>
+            <img class="tileImg" src="assets/proj-kamba-hover.webp" alt="" />
+          </div>
+          <div class="tileMeta">
+            <span class="tileName">Kamba Travel</span>
+            <span class="tileDate">em breve</span>
+          </div>
+        </div>
+
+        <div id="s4Sign">
+          <img src="assets/mauro-signature-lime.svg" alt="" />
+        </div>
+        <div id="s4Cta">ver projetos</div>
+        <div id="s4CtaRule"></div>
+      </section>
+
+      <!-- ============ blackout ============ -->
+      <section id="blackoutClip" class="clip" data-start="19.9" data-duration="0.3" data-track-index="4">
+        <div id="blackout"></div>
+      </section>
+
+      <!-- ============ audio ============ -->
+      <audio
+        id="bgm"
+        src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3"
+        data-start="0"
+        data-duration="20.2"
+        data-track-index="10"
+        data-volume="0.35"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.4,"v":1},{"t":19.4,"v":1},{"t":20.2,"v":0}]}]}'
+      ></audio>
+
+      <audio
+        id="sfxMark"
+        src="assets/sfx/interface/bong_001.ogg"
+        data-start="0.12"
+        data-duration="0.12"
+        data-track-index="11"
+        data-volume="0.55"
+      ></audio>
+
+      <audio
+        id="sfxWipe"
+        src="assets/sfx/interface/drop_001.ogg"
+        data-start="4.35"
+        data-duration="0.11"
+        data-track-index="12"
+        data-volume="0.6"
+      ></audio>
+
+      <audio
+        id="sfxFront"
+        src="assets/sfx/interface/select_008.ogg"
+        data-start="10.88"
+        data-duration="0.05"
+        data-track-index="13"
+        data-volume="0.6"
+      ></audio>
+
+      <audio
+        id="sfxCard1"
+        src="assets/sfx/casino/card-place-1.ogg"
+        data-start="15.24"
+        data-duration="0.69"
+        data-track-index="14"
+        data-volume="0.62"
+      ></audio>
+
+      <audio
+        id="sfxCard3"
+        src="assets/sfx/casino/card-place-4.ogg"
+        data-start="17.42"
+        data-duration="0.6"
+        data-track-index="15"
+        data-volume="0.62"
+      ></audio>
+    </div>
+
+    <script>
+      (function () {
+        var tl = gsap.timeline({ paused: true });
+
+        /* ---------------- helpers ---------------- */
+        // the hero's own arc wipe: boundary sags 0.2 further at centre
+        function clipPoly(p) {
+          var N = 40,
+            sag = Math.sin(p * Math.PI) * 0.2,
+            pts = ["0% 0%", "100% 0%"];
+          for (var i = N; i >= 0; i--) {
+            var x = i / N;
+            pts.push(
+              (x * 100).toFixed(2) + "% " + ((p + Math.sin(x * Math.PI) * sag) * 100).toFixed(2) + "%"
+            );
+          }
+          return "polygon(" + pts.join(",") + ")";
+        }
+
+        /* ---------------- ambient decoratives (all scenes) ---------------- */
+        tl.to("#bgGrid", { y: -60, duration: 20.2, ease: "none" }, 0);
+        tl.fromTo("#ghost1", { x: 0 }, { x: 90, duration: 3.27, ease: "none" }, 0);
+        tl.fromTo("#ghost2", { x: 0 }, { x: -70, duration: 5.47, ease: "none" }, 3.27);
+        tl.fromTo("#ghost3", { x: 0 }, { x: 60, duration: 5.17, ease: "none" }, 14.73);
+
+        /* ---------------- SCENE 1 : a marca (0 → 3.27) ---------------- */
+        tl.to("#mk1", { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 0.15);
+        tl.to("#mk2", { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 0.29);
+        tl.to("#mk3", { strokeDashoffset: 0, duration: 0.46, ease: "power3.out" }, 0.55);
+
+        tl.fromTo(
+          "#s1Rule",
+          { scaleX: 0, opacity: 1 },
+          { scaleX: 1, opacity: 1, duration: 0.62, ease: "power3.out" },
+          0.5
+        );
+        tl.to("#s1Rule", { opacity: 0, duration: 0.4 }, 2.5);
+
+        tl.fromTo("#s1Meta", { x: -26, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 0.8);
+        tl.to("#s1Meta", { opacity: 0, duration: 0.35 }, 2.62);
+
+        tl.fromTo(
+          "#s1Eyebrow",
+          { y: 22, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" },
+          0.95
+        );
+
+        /* ---------------- SCENE 2 : o piloto (3.27 → 8.74) ---------------- */
+        tl.fromTo(
+          "#portraitW",
+          { scale: 1.06, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.8, ease: "power3.out" },
+          3.35
+        );
+        tl.fromTo(
+          "#s2Kicker",
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" },
+          3.6
+        );
+        tl.fromTo(
+          "#s2L1",
+          { y: 46, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: "power4.out" },
+          3.85
+        );
+        tl.fromTo(
+          "#s2L2",
+          { y: 58, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.66, ease: "power4.out" },
+          4.05
+        );
+
+        // the signature wipe — the hero's shader, evaluated in CSS
+        var wipeEl = document.getElementById("wipeLayer");
+        var wp = { p: 0 };
+        tl.to(
+          wp,
+          {
+            p: 1,
+            duration: 2.75,
+            ease: "expo.inOut",
+            onUpdate: function () {
+              wipeEl.style.clipPath = clipPoly(wp.p);
+            },
+          },
+          4.4 // beat-locked near 4.39
+        );
+
+        tl.fromTo(
+          "#s2Name",
+          { y: 16, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
+          7.2
+        );
+
+        /* ---------------- SCENE 3 : a dualidade (8.74 → 14.73) ---------------- */
+        tl.fromTo(
+          "#divider",
+          { scaleY: 0, opacity: 1 },
+          { scaleY: 1, opacity: 1, duration: 0.66, ease: "power3.inOut" },
+          8.82
+        );
+
+        tl.fromTo(
+          "#tagBack",
+          { y: 18, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.42, ease: "power3.out" },
+          8.86
+        );
+        tl.fromTo(
+          "#headBack",
+          { y: 52, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.55, ease: "power4.out" },
+          8.9
+        );
+        tl.fromTo(
+          "#ruleBack",
+          { scaleX: 0, opacity: 1 },
+          { scaleX: 1, opacity: 1, duration: 0.45, ease: "power3.out", transformOrigin: "left center" },
+          9.16
+        );
+        tl.fromTo(
+          "#bodyBack",
+          { y: 26, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.55, ease: "power2.out" },
+          9.1
+        );
+
+        // beat-locked: 10.93s (strong cue, intensity 0.97)
+        tl.fromTo(
+          "#tagFront",
+          { y: 18, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.42, ease: "power3.out" },
+          10.85
+        );
+        tl.fromTo(
+          "#headFront",
+          { y: 52, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.55, ease: "power4.out" },
+          10.93
+        );
+        tl.fromTo(
+          "#ruleFront",
+          { scaleX: 0, opacity: 1 },
+          { scaleX: 1, opacity: 1, duration: 0.45, ease: "power3.out", transformOrigin: "left center" },
+          11.19
+        );
+        tl.fromTo(
+          "#bodyFront",
+          { y: 26, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+          11.1
+        );
+
+        /* ---------------- SCENE 4 : os projetos (14.73 → 19.90) ---------------- */
+        tl.fromTo("#t1", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, ease: "power4.out" }, 14.85);
+        tl.fromTo("#t2", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, ease: "power4.out" }, 14.97);
+
+        // beat-grid: tiles at 15.29 / 16.38 / 17.47
+        tl.fromTo(
+          "#tile1",
+          { y: 64, scale: 0.94, opacity: 0 },
+          { y: 0, scale: 1, opacity: 1, duration: 0.62, ease: "back.out(1.4)" },
+          15.29
+        );
+        tl.fromTo(
+          "#tile2",
+          { y: 64, scale: 0.94, opacity: 0 },
+          { y: 0, scale: 1, opacity: 1, duration: 0.62, ease: "back.out(1.4)" },
+          16.38
+        );
+        tl.fromTo(
+          "#tile3",
+          { y: 64, scale: 0.94, opacity: 0 },
+          { y: 0, scale: 1, opacity: 1, duration: 0.62, ease: "back.out(1.4)" },
+          17.47
+        );
+
+        // signature writes itself
+        tl.to("#s4Sign", { clipPath: "inset(0 0% 0 0)", duration: 0.85, ease: "power2.inOut" }, 18.0);
+
+        tl.fromTo(
+          "#s4Cta",
+          { y: 18, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" },
+          18.6
+        );
+        tl.fromTo(
+          "#s4CtaRule",
+          { scaleX: 0, opacity: 1 },
+          { scaleX: 1, opacity: 1, duration: 0.5, ease: "power3.out" },
+          18.68
+        );
+
+        /* ---------------- blackout ---------------- */
+        tl.to("#blackout", { opacity: 1, duration: 0.3, ease: "power2.in" }, 19.9);
+
+        /* ---------------- audio-reactive : subtle ---------------- */
+        // lime glow breathes with RMS; the portrait's presence lifts on bass
+        var A = window.__AUDIO;
+        var glow = document.getElementById("bgGlow");
+        var pw = document.getElementById("portraitW");
+        if (A && A.frames && A.frames.length) {
+          var step = 2; // every other frame — 15 Hz is plenty for a breath
+          for (var f = 0; f < A.frames.length; f += step) {
+            (function (frame) {
+              var t = frame.t;
+              tl.call(
+                function () {
+                  glow.style.opacity = (0.09 + frame.r * 0.13).toFixed(4);
+                },
+                [],
+                t
+              );
+            })(A.frames[f]);
+          }
+          for (var g = 0; g < A.frames.length; g += step) {
+            (function (frame) {
+              var bass = frame.b[0];
+              tl.call(
+                function () {
+                  pw.style.filter = "brightness(" + (1 + bass * 0.06).toFixed(4) + ")";
+                },
+                [],
+                frame.t
+              );
+            })(A.frames[g]);
+          }
+        }
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
