@@ -10158,3 +10158,5 @@ blockquote {
 /* nav MF monogram (replaces rive canvas) */
 .nav-middle .nav-mf-mark{width:100%;height:100%;display:block;transition:transform .35s cubic-bezier(.4,0,.2,1)}
 .nav-middle:hover .nav-mf-mark{transform:scale(1.09)}
+
+.s.is-callout-socials .text-title-lg-mona{color:var(--color--white)}
