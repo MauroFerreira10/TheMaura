@@ -10160,3 +10160,10 @@ blockquote {
 .nav-middle:hover .nav-mf-mark{transform:scale(1.09)}
 
 .s.is-callout-socials .text-title-lg-mona{color:var(--color--white)}
+
+
+/* a11y fixes — Lighthouse accessibility targets */
+.footer-links-layout .text-link-w { min-height: 24px; display: flex; align-items: center; }
+[data-gl-change-from^="dark"] .horizontal-item-layout .text-eyebrow,
+[data-gl-change-from^="dark"] .horizontal-item-layout .horizontal-item-text { color: #9da096; }
+.s.is-callout-socials .callout-socials-intro-w .text-cta-short-intro { color: var(--color--lime); }
