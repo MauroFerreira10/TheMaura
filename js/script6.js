@@ -4119,7 +4119,9 @@ void main() {
 
               vec4 diffuseColor = vec4(vec3(diffuse * mix(1.0, darkEdges, uDarkEdges)), opacity);
             `)};if(Q.name=="plastic")this.plasticMesh=Q,Q.renderOrder=1,Q.material=this.plasticMaterial}),this.scene=new rB,this.scene.add(this.instance),this.renderTarget=new XB(this.gl.sizes.width*this.gl.sizes.pixelRatio,this.gl.sizes.height*this.gl.sizes.pixelRatio,{samples:2}),this.wireframeMeshMaterial=new fQ({wireframe:!0,transparent:!0,uniforms:{uTime:new YA(0),uIsWireframeAnimating:new YA(window.mfGL.params.headScene.IS_WIREFRAME_ANIMATING),uOpacity:new YA(1)},vertexShader:`
-        varying vec2 vUv;
+
+// RIVE performance optimization guard
+window.RIVELoaded = window.RIVELoaded || true;        varying vec2 vUv;
         varying vec3 vPosition;
 
         void main()
